@@ -10,7 +10,7 @@ export const setupServer = () => {
     app.use(cors());
     app.use(pinoHttp());
 
-    app.get('/contacts', router);
+    app.use('/contacts', router);
 
     app.use((req, res) => {
         res.status(404).send({
