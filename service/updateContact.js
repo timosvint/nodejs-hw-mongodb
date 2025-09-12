@@ -1,23 +1,22 @@
+import { boolean } from "joi";
+import { ContactCollection } from "../src/db/models/contact"
 
-import { ContactCollection } from "../src/db/models/contact.js"
-
-export const updateContact = async (contactId, payload, options = {}) => {
-    const updateResult = await ContactCollection.findOneAndUpdate(
+export const updateStudent = async (contactId, payload, options = {}) => {
+    const rawResult = await ContactCollection.findOneAndUpdate(
         { _id: contactId },
-        { $set: payload },
+        payload,
         {
             new: true,
-            runValidators: true,
+            includeResultMetadata: true,
             ...options
         }
 
 
     )
-
-    if (!updateResult) return null
+    if (!rawResult || !rawResult.value) return null;
 
     return {
-        contact: updateResult,
-        isNew: false
+        contact: rawResult.value,
+        isNew: Boolean(rawResult?.lastErrorObject?.upserted)
     }
 }
