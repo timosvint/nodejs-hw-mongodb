@@ -1,5 +1,5 @@
 import { boolean } from "joi";
-import { ContactCollection } from "../src/db/models/contact"
+import { ContactCollection } from "../src/db/models/contact.js"
 
 export const updateStudent = async (contactId, payload, options = {}) => {
     const rawResult = await ContactCollection.findOneAndUpdate(
