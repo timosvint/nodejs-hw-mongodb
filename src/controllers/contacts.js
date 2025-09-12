@@ -2,7 +2,7 @@ import { ContactCollection } from "../db/models/contact.js";
 import createHttpError from "http-errors";
 import { createContact } from "../../service/contacts.js";
 import { updateContact } from "../../service/updateContact.js";
-import { deteContact } from "../../service/deleteContact.js";
+import { deleteContact as deleteContacts } from "../../service/deleteContact.js";
 
 export const getAllContacts = async (req, res, next) => {
     const contacts = await ContactCollection.find();
@@ -56,7 +56,7 @@ export const patchContact = async (req, res, next) => {
 
 export const deleteContact = async (req, res, next) => {
     const { contactId } = req.params;
-    const contact = await deteContact(contactId);
+    const contact = await deleteContacts(contactId);
 
     if (!contact) {
         throw createHttpError(404, "contact not found");
