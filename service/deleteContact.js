@@ -1,7 +1,7 @@
 import { ContactCollection } from "../src/db/models/contact"
 
 export const deteContact = async (contactId) => {
-    const contact = ContactCollection.findOneAndDelete({
+    const contact = await ContactCollection.findOneAndDelete({
         _id: contactId,
     })
 

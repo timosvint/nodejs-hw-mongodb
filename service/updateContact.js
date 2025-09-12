@@ -2,21 +2,22 @@
 import { ContactCollection } from "../src/db/models/contact.js"
 
 export const updateContact = async (contactId, payload, options = {}) => {
-    const rawResult = await ContactCollection.findOneAndUpdate(
+    const updateResult = await ContactCollection.findOneAndUpdate(
         { _id: contactId },
         { $set: payload },
         {
             new: true,
-            includeResultMetadata: true,
+            runValidators: true,
             ...options
         }
 
 
     )
-    if (!rawResult || !rawResult.value) return null;
+
+    if (!updateResult) return null
 
     return {
-        contact: rawResult.value,
-        isNew: Boolean(rawResult?.lastErrorObject?.upserted)
+        contact: updateResult,
+        isNew: false
     }
 }

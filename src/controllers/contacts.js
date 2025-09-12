@@ -2,6 +2,7 @@ import { ContactCollection } from "../db/models/contact.js";
 import createHttpError from "http-errors";
 import { createContact } from "../../service/contacts.js";
 import { updateContact } from "../../service/updateContact.js";
+import { deteContact } from "../../service/deleteContact.js";
 
 export const getAllContacts = async (req, res, next) => {
     const contacts = await ContactCollection.find();
@@ -48,14 +49,14 @@ export const patchContact = async (req, res, next) => {
      res.json({
     status: 200,
     message: `Successfully patched a student!`,
-    data: result.student,
+    data: result.contact,
   });
 };
 
 
 export const deleteContact = async (req, res, next) => {
     const { contactId } = req.params;
-    const contact = await deleteContact(contactId);
+    const contact = await deteContact(contactId);
 
     if (!contact) {
         throw createHttpError(404, "contact not found");
