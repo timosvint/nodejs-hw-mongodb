@@ -3,9 +3,17 @@ import createHttpError from "http-errors";
 import { createContact } from "../../service/contacts.js";
 import { updateContact } from "../../service/updateContact.js";
 import { deleteContact as deleteContacts } from "../../service/deleteContact.js";
+import { parsePaginationParams } from "../utils/parsePaginationParams.js";
+import { getAllContact } from "../../service/getAllContacts.js";
+import { parseSortParams } from "../utils/parseSortParams.js";
 
 export const getAllContacts = async (req, res, next) => {
-    const contacts = await ContactCollection.find();
+
+    const { page, perPage } = parsePaginationParams(req.query);
+    const { sortBy, sortOrder } = parseSortParams(req.query);
+    const contacts = await getAllContact({
+        page, perPage, sortBy, sortOrder,
+    });
     res.json({
     status: 200,
     message: "Successfully found contacts!",
