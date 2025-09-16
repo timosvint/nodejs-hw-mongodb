@@ -5,7 +5,7 @@ export const filter = (query) => {
     const { isFavourite, contactType } = query;
 
     const {
-        error: isFavoriteError,
+        error: isFavouriteError,
         value: parsedIsFavorite } =
         filterSchema.favouriteFilterSchema.validate(isFavourite, { abortEarly: false });
 
@@ -14,7 +14,7 @@ export const filter = (query) => {
         value: parsedContactType } = filterSchema.contactTypeFilterSchema.validate(contactType, { abortEarly: false });
 
     return {
-        isFavorite: isFavoriteError ? undefined : parsedIsFavorite,
+        isFavourite: isFavouriteError ? undefined : parsedIsFavorite,
         contactType: contactTypeError ? undefined : parsedContactType,
     };
 
