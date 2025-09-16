@@ -1,5 +1,5 @@
 
-import { SORT_ORDER } from "../../sortScore/SORT_ORDER";
+import { SORT_ORDER } from "../../sortScore/SORT_ORDER.js";
 
 const parseSortOrder = (sortOrder) => {
     const isknowOrder = [SORT_ORDER.ASC, SORT_ORDER.DESC].includes(sortOrder);
