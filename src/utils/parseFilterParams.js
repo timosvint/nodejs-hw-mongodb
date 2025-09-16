@@ -2,12 +2,12 @@ import { filterSchema } from "../../schemas/joiSchema.js";
 
 
 export const filter = (query) => {
-    const { isFavorite, contactType } = query;
+    const { isFavourite, contactType } = query;
 
     const {
         error: isFavoriteError,
         value: parsedIsFavorite } =
-        filterSchema.favouriteFilterSchema.validate(isFavorite, { abortEarly: false });
+        filterSchema.favouriteFilterSchema.validate(isFavourite, { abortEarly: false });
 
     const {
         error: contactTypeError,
