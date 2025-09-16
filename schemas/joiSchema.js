@@ -25,7 +25,7 @@ export const patchJoiSchema = Joi.object({
         'string.base': 'Name must be string',
         'string.min': 'name must have minimum length of 3',
         'string.max': 'name must have maximum length of 20 ',
-    }).required(),
+    }),
     phoneNumber: Joi.string().regex(/^[0-9]{10}$/).messages({
             'string.base': 'phoneNumber must be typed in string',
         'string.pattern.base': `phoneNumber must have 10 digits.`,
