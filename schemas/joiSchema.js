@@ -16,6 +16,7 @@ export const upsertJoiSchema = Joi.object({
     email: Joi.string().email().messages({
         'string.email': 'email address is not valid btw',
     }).default(null),
+    isFavourite: Joi.boolean().default(false),
     contactType: Joi.valid('work', 'home', 'personal').default('personal')
 })
 
@@ -36,3 +37,9 @@ export const patchJoiSchema = Joi.object({
         'any.only': 'type work home or personal bro'
     })
 })
+
+
+export const filterSchema = {
+    favouriteFilterSchema: Joi.boolean().default(() => undefined),
+    contactTypeFilterSchema: Joi.valid('work', 'home', 'personal').default(() => undefined)
+}
