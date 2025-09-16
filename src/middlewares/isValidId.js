@@ -2,11 +2,11 @@ import { isValidObjectId } from "mongoose";
 
 
 export const isValidId = (req, res, next) => {
-    const { Id } = req.params;
+    const { contactId } = req.params;
 
-    if (isValidObjectId(Id)) {
-        return res.status(404).json({
-            status: 404,
+    if (!isValidObjectId(contactId)) {
+        return res.status(400).json({
+            status: 400,
             message: 'dont find person by id'
         });
     }

@@ -5,7 +5,7 @@ import { updateContact } from "../../service/updateContact.js";
 import { deleteContact as deleteContacts } from "../../service/deleteContact.js";
 import { parsePaginationParams } from "../utils/parsePaginationParams.js";
 import { getAllContact } from "../../service/getAllContacts.js";
-import { parseSortParams } from "../utils/parseSortParams.js.js";
+import { parseSortParams } from "../utils/parseSortParams.js";
 import { filter } from "../utils/parseFilterParams.js";
 
 export const getAllContacts = async (req, res, next) => {
