@@ -33,6 +33,9 @@ export const patchJoiSchema = Joi.object({
         email: Joi.string().email().messages({
         'string.email': 'email address is not valid btw',
         }).default(null),
+    isFavourite: Joi.boolean().messages({
+             'boolean.base' : 'isFavourite must be boolean'
+         }),
             contactType: Joi.valid('work', 'home', 'personal').messages({
         'any.only': 'type work home or personal bro'
     })
