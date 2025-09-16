@@ -2,7 +2,7 @@ import { filterSchema } from "../../schemas/joiSchema.js";
 
 
 export const filter = (req) => {
-    const { isFavorite, contactType } = req.query;
+    const { isFavorite, contactType } = req;
 
     const {
         error: isFavoriteError,
