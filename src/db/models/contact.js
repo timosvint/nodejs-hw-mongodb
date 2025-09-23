@@ -1,4 +1,5 @@
 import { model, Schema } from "mongoose";
+import mongoose from "mongoose";
 
 
 const contactSchema = new Schema({
@@ -12,10 +13,16 @@ const contactSchema = new Schema({
     },
     email: {
         type: String
+
     },
     isFavourite: {
         type: Boolean,
         default: false
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     contactType: {
         type: String,

@@ -1,8 +1,8 @@
 import { ContactCollection } from "../src/db/models/contact.js"
 
-export const updateContact = async (contactId, payload, options = {}) => {
+export const updateContact = async (contactId, payload, userId, options = {}) => {
     const updateResult = await ContactCollection.findOneAndUpdate(
-        { _id: contactId },
+        { _id: contactId, userId },
         { $set: payload },
         {
             new: true,
@@ -18,6 +18,7 @@ export const updateContact = async (contactId, payload, options = {}) => {
     return {
         contact: updateResult,
         isNew: false
+
     }
 }
 

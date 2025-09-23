@@ -1,12 +1,15 @@
 import { ContactCollection } from "../src/db/models/contact.js"
 import { calculatePaginationData } from "../src/utils/calculatePaginationData.js";
 import { SORT_ORDER } from "../sortScore/SORT_ORDER.js";
+import createHttpError from "http-errors";
 
-export const getAllContact = async ({ page = 1, perPage = 10, sortOrder = SORT_ORDER.ASC, sortBy = '_id', filterSort = {}}) => {
+export const getAllContact = async ({ page = 1, perPage = 10, sortOrder = SORT_ORDER.ASC, sortBy = '_id', filterSort = {}, userId}) => {
+
+    if(!userId) throw createHttpError(401, "userId is required")
     const limit = perPage
     const skip = (page - 1) * perPage;
 
-    const contactQuery = ContactCollection.find()
+    const contactQuery = ContactCollection.find({ userId })
 
 
         if(filterSort.isFavourite !== undefined){

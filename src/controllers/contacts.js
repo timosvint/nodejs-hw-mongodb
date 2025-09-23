@@ -19,18 +19,19 @@ export const getAllContacts = async (req, res, next) => {
         sortBy,
         sortOrder,
         filterSort,
+        userId: req.user._id,
     });
     res.json({
     status: 200,
     message: "Successfully found contacts!",
-    data: contacts,
+      ...contacts,
     });
 
 };
 
 export const getContactById = async (req, res, next) => {
     const { contactId } = req.params;
-    const contact = await ContactCollection.findById(contactId);
+    const contact = await ContactCollection.findOne({_id: contactId, userId: req.user._id });
        if (!contact) {
            throw createHttpError(404, "Contact not found");
        }
@@ -44,7 +45,7 @@ export const getContactById = async (req, res, next) => {
 };
 
 export const postContact = async (req, res, next) => {
-    const contact = await createContact(req.body);
+    const contact = await createContact({...req.body, userId: req.user._id});
     res.status(201).json({
         status: 201,
         message: `Successfully created a contact!`,
@@ -55,7 +56,7 @@ export const postContact = async (req, res, next) => {
 
 export const patchContact = async (req, res, next) => {
     const { contactId } = req.params;
-    const result = await updateContact(contactId, req.body);
+    const result = await updateContact(contactId, req.body,  req.user._id);
 
     if (!result) {
         throw createHttpError(404, "Contact not found");
@@ -70,7 +71,7 @@ export const patchContact = async (req, res, next) => {
 
 export const deleteContact = async (req, res, next) => {
     const { contactId } = req.params;
-    const contact = await deleteContacts(contactId);
+    const contact = await ContactCollection.findOneAndDelete({ _id: contactId, userId: req.user._id });
 
     if (!contact) {
         throw createHttpError(404, "Contact not found");
