@@ -6,15 +6,12 @@ import { authLogin, authRegister, logoutUser, refreshUserSessionController } fro
 import { authenticate } from "../middlewares/authenticate.js";
 
 const router = Router();
-
-router.use(authenticate);
-
 router.post('/register', validateBody(authRegisterJoi), ctrlWrapper(authRegister));
 
 router.post('/login', validateBody(authLoginJoi), ctrlWrapper(authLogin));
 
 router.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
-router.post('/logout', ctrlWrapper(logoutUser));
+router.post('/logout', authenticate, ctrlWrapper(logoutUser));
 
 export default router;
