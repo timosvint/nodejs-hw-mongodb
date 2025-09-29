@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 import { getEnv } from "../utils/getEnv.js";
-import dotenv from "dotenv";
-dotenv.config();
 
 export const initMongoDB = async () => {
     try {

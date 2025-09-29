@@ -96,7 +96,11 @@ export const serviceResetAuth = async(email) => {
        throw createHttpError(404, 'user not found')
     }
 
+     const secret = getEnv('JWT_SECRET')
 
+    if (!secret) {
+        throw new Error('JWT_SECRET: ' + JSON.stringify(getEnv('JWT_SECRET')));
+    }
 
 
 
@@ -105,10 +109,11 @@ export const serviceResetAuth = async(email) => {
             sub: user._id,
             email,
         },
-        getEnv('JWT_SECRET'),
+        secret,
         {
             expiresIn: '5m',
         },
+
     );
 
     try {
@@ -119,7 +124,7 @@ export const serviceResetAuth = async(email) => {
             html: `<p>hi <a href="${resetToken}">reset password</a></p>`
         })
     } catch (error) {
-        throw createHttpError(500, "Failed to send the email, please try again later.")
+         throw new Error(error.message || error.toString());
     }
 
 }
@@ -129,6 +134,10 @@ export const resetPassword = async (payload) => {
 
      const secret = getEnv('JWT_SECRET')
 
+    if (!secret) {
+        throw new Error('JWT_SECRET: ' + JSON.stringify(getEnv('JWT_SECRET')));
+    }
+    
     try {
         entries = jwt.verify(payload.token, secret);
     } catch (err) {

@@ -69,7 +69,9 @@ export const logoutUser = async (req, res) => {
 
 export const resetAuth = async (req, res) => {
 
-     await serviceResetAuth(req.body.email);
+    await serviceResetAuth(req.body.email);
+
+    
 
     res.status(200).json({
         status: 200,

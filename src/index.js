@@ -9,7 +9,7 @@ import { TEMP_UPLOAD_DIR, UPLOAD_DIR } from "./constants/patchFrom.js";
 const bootstrap = async () => {
     await initMongoDB();
     await createDirIfNotExists(TEMP_UPLOAD_DIR);
-    createDirIfNotExists(UPLOAD_DIR)
+    createDirIfNotExists(UPLOAD_DIR);
     setupServer();
 };
 
