@@ -7,9 +7,6 @@ import Session from "../src/db/models/Session.js";
 import { sendEmail } from "../src/utils/sendMail.js";
 import { getEnv } from "../src/utils/getEnv.js";
 import jwt from "jsonwebtoken"
-import dotenv from "dotenv";
-dotenv.config();
-
 
 export const registerUser = async (payload) => {
        const emailUser = await User.findOne({email: payload.email})
