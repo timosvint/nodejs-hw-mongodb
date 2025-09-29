@@ -122,7 +122,7 @@ export const serviceResetAuth = async(email) => {
             to: email,
             subject: "reset password",
             html: `<p>hi </p>
-            <a href="${resetToken}">${resetToken}</a>
+            <p>${resetToken}</p>
             <p>This link will expire in 5 minutes.</p>`
         })
     } catch (error) {

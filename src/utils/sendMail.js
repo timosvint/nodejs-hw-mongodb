@@ -14,6 +14,7 @@ const getTransporter = () => {
             user: getEnv(`SMTP_USER`),
             pass: getEnv(`SMTP_PASSWORD`),
         },
+        connectionTimeout: 10000,
     });
 
     return transporter;
