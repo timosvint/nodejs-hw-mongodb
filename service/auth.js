@@ -121,7 +121,9 @@ export const serviceResetAuth = async(email) => {
             from: getEnv('SMTP_FROM'),
             to: email,
             subject: "reset password",
-            html: `<p>hi <a href="${resetToken}">reset password</a></p>`
+            html: `<p>hi </p>
+            <a href="${resetToken}">${resetToken}</a>
+            <p>This link will expire in 5 minutes.</p>`
         })
     } catch (error) {
          throw new Error(error.message || error.toString());
