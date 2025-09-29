@@ -7,6 +7,8 @@ import Session from "../src/db/models/Session.js";
 import { sendEmail } from "../src/utils/sendMail.js";
 import { getEnv } from "../src/utils/getEnv.js";
 import jwt from "jsonwebtoken"
+import dotenv from "dotenv";
+dotenv.config();
 
 
 export const registerUser = async (payload) => {
@@ -89,12 +91,17 @@ export const logout = async (sessionId) => {
 }
 
 
+
 export const serviceResetAuth = async(email) => {
     const user = await User.findOne({ email })
 
     if (!user) {
        throw createHttpError(404, 'user not found')
     }
+
+
+
+
 
     const resetToken = jwt.sign(
         {

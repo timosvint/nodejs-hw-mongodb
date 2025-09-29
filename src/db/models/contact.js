@@ -17,7 +17,7 @@ const contactSchema = new Schema({
     },
     photo: {
         type: String
-    },
+    }
     isFavourite: {
         type: Boolean,
         default: false
