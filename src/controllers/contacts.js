@@ -2,11 +2,13 @@ import { ContactCollection } from "../db/models/contact.js";
 import createHttpError from "http-errors";
 import { createContact } from "../../service/contacts.js";
 import { updateContact } from "../../service/updateContact.js";
-import { deleteContact as deleteContacts } from "../../service/deleteContact.js";
 import { parsePaginationParams } from "../utils/parsePaginationParams.js";
 import { getAllContact } from "../../service/getAllContacts.js";
 import { parseSortParams } from "../utils/parseSortParams.js";
 import { filter } from "../utils/parseFilterParams.js";
+import { saveFileToCloudinary } from "../utils/saveFileToCloudinary.js";
+import { getEnv } from "../utils/getEnv.js";
+import { saveFileToUploadDir } from "../utils/saveFileToUploadDir.js";
 
 export const getAllContacts = async (req, res, next) => {
 
@@ -56,7 +58,21 @@ export const postContact = async (req, res, next) => {
 
 export const patchContact = async (req, res, next) => {
     const { contactId } = req.params;
-    const result = await updateContact(contactId, req.body,  req.user._id);
+    const photo = req.file;
+
+    let photoUrl;
+
+    if (photo) {
+        if (getEnv('ENABLE_CLOUDINARY') === 'true') {
+            photoUrl = await saveFileToCloudinary(photo);
+        }
+        else {
+            photoUrl = await saveFileToUploadDir(photo);
+        }
+    }
+
+
+    const result = await updateContact(contactId, req.body,  req.user._id, photoUrl);
 
     if (!result) {
         throw createHttpError(404, "Contact not found");

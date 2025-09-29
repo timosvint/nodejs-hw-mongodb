@@ -4,7 +4,9 @@ import bcrypt from "bcrypt"
 import {randomBytes} from "crypto"
 import { THIRTY_DAYS, FIFTEEN_MINUTES } from "../src/utils/timeForLife.js";
 import Session from "../src/db/models/Session.js";
-
+import { sendEmail } from "../src/utils/sendMail.js";
+import { getEnv } from "../src/utils/getEnv.js";
+import jwt from "jsonwebtoken"
 
 
 export const registerUser = async (payload) => {
@@ -83,5 +85,65 @@ export const refreshTokenUser = async ({ sessionId, refreshToken }) => {
 
 
 export const logout = async (sessionId) => {
-    await Session.deleteOne({_id: sessionId})
+     await Session.deleteOne({_id: sessionId})
+}
+
+
+export const serviceResetAuth = async(email) => {
+    const user = await User.findOne({ email })
+
+    if (!user) {
+       throw createHttpError(404, 'user not found')
+    }
+
+    const resetToken = jwt.sign(
+        {
+            sub: user._id,
+            email,
+        },
+        getEnv('JWT_SECRET'),
+        {
+            expiresIn: '5m',
+        },
+    );
+
+    try {
+        await sendEmail({
+            from: getEnv('SMTP_FROM'),
+            to: email,
+            subject: "reset password",
+            html: `<p>hi <a href="${resetToken}">reset password</a></p>`
+        })
+    } catch (error) {
+        throw createHttpError(500, "Failed to send the email, please try again later.")
+    }
+
+}
+
+export const resetPassword = async (payload) => {
+    let entries;
+
+    try {
+        entries = jwt.verify(payload.token, getEnv('JWT_SECRET'));
+    } catch (err) {
+        if (err instanceof Error) throw createHttpError(401, "Token is expired or invalid.");
+        throw err
+    }
+
+    const user = await User.findOne({
+        email: entries.email,
+        _id: entries.sub,
+    });
+
+    if (!user) {
+        throw createHttpError(404, 'User not found!')
+    }
+
+
+    const encryptedPassword = await bcrypt.hash(payload.password, 10)
+
+    await User.updateMany(
+        { _id: user._id },
+        {password: encryptedPassword},
+    )
 }

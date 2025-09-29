@@ -1,11 +1,12 @@
-
+import mongoose from "mongoose";
 import { model, Schema } from "mongoose";
 
 
 const sessionSchema = new Schema({
     userId: {
-        type: String,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     accessToken: {
         type: String,

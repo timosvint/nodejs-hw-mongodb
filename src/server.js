@@ -5,6 +5,8 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import router from './routerConnect.js';
 import cookieParser from "cookie-parser";
+import { UPLOAD_DIR } from './constants/patchFrom.js';
+
 
 export const setupServer = () => {
   const app = express();
@@ -14,8 +16,10 @@ export const setupServer = () => {
     app.use(pinoHttp());
     app.use(express.json());
   app.use(cookieParser());
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
-      app.use(router);
+  app.use(router);
+
 
     app.use(notFoundHandler);
 
