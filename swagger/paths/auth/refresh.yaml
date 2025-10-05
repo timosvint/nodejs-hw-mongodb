@@ -22,21 +22,9 @@ responses:
               type: object
               required:
                 - accessToken
-                - refreshToken
-                - accessTokenValidUntil
-                - refreshTokenValidUntil
               properties:
                 accessToken:
                   type: string
                   example: ey5916281902fas09wa5w15012508
-                refreshToken:
-                  type: string
-                  example: dgdhtwotauisijhgowei24125sfags
-                accessTokenValidUntil:
-                  type: string
-                  format: date-time
-                refreshTokenValidUntil:
-                  type: string
-                  format: date-time
   '404':
     $ref: '../../components/response/404.yaml'

@@ -42,4 +42,4 @@ responses:
               example: 201
             message:
               type: string
-              example: register was succesfull
+              example: Successfully registered a user!

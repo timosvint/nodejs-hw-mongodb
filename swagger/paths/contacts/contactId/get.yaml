@@ -29,7 +29,7 @@ responses:
               example: 200
             message:
               type: string
-              example: Found contact by id tw1621561wrarfc!
+              example: Successfully found contact with id tw1621561wrarfc
             data:
               type: object
               $ref: '../../../components/schema/contactByIdSchema.yaml'

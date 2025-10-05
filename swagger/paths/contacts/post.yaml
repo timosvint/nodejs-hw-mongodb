@@ -61,7 +61,7 @@ responses:
               example: 201
             message:
               type: string
-              example: contact created
+              example: Successfully created a contact!
             data:
               $ref: '../../components/schema/contactByIdSchema.yaml'
   '404':

@@ -12,6 +12,9 @@
   "servers": [
     {
       "url": "http://localhost:3000"
+    },
+    {
+      "url": "https://nodejs-hw-mongodb-ndlc.onrender.com"
     }
   ],
   "tags": [
@@ -77,7 +80,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "user password reseted"
+                      "example": "Password has been successfully reset."
                     }
                   }
                 }
@@ -137,7 +140,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "reset password sended to user"
+                      "example": "Reset password email has been successfully sent."
                     }
                   }
                 }
@@ -178,27 +181,12 @@
                     "data": {
                       "type": "object",
                       "required": [
-                        "accessToken",
-                        "refreshToken",
-                        "accessTokenValidUntil",
-                        "refreshTokenValidUntil"
+                        "accessToken"
                       ],
                       "properties": {
                         "accessToken": {
                           "type": "string",
                           "example": "ey5916281902fas09wa5w15012508"
-                        },
-                        "refreshToken": {
-                          "type": "string",
-                          "example": "dgdhtwotauisijhgowei24125sfags"
-                        },
-                        "accessTokenValidUntil": {
-                          "type": "string",
-                          "format": "date-time"
-                        },
-                        "refreshTokenValidUntil": {
-                          "type": "string",
-                          "format": "date-time"
                         }
                       }
                     }
@@ -291,7 +279,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "register was succesfull"
+                      "example": "Successfully registered a user!"
                     }
                   }
                 }
@@ -355,32 +343,17 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "user was fully logined"
+                      "example": "Successfully logged in an user!"
                     },
                     "data": {
                       "type": "object",
                       "required": [
-                        "accessToken",
-                        "refreshToken",
-                        "accessTokenValidUntil",
-                        "refreshTokenValidUntil"
+                        "accessToken"
                       ],
                       "properties": {
                         "accessToken": {
                           "type": "string",
                           "example": "ey5916281902fas09wa5w15012508"
-                        },
-                        "refreshToken": {
-                          "type": "string",
-                          "example": "dgdhtwotauisijhgowei24125sfags"
-                        },
-                        "accessTokenValidUntil": {
-                          "type": "string",
-                          "format": "date-time"
-                        },
-                        "refreshTokenValidUntil": {
-                          "type": "string",
-                          "format": "date-time"
                         }
                       }
                     }
@@ -621,7 +594,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "contact created"
+                      "example": "Successfully created a contact!"
                     },
                     "data": {
                       "$ref": "#/components/schemas/contactByIdSchema"
@@ -680,7 +653,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Found contact by id tw1621561wrarfc!"
+                      "example": "Successfully found contact with id tw1621561wrarfc"
                     },
                     "data": {
                       "type": "object",
@@ -720,29 +693,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "contact deleted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "delete contact by id tw1621561wrarfc!"
-                    }
-                  }
-                }
-              }
-            }
+          "204": {
+            "description": "contact deleted"
           },
           "404": {
             "$ref": "#/components/responses/404"
@@ -843,7 +795,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "contact updated with id 6755asdfaw6asg6"
+                      "example": "Successfully patched a contact!"
                     },
                     "data": {
                       "$ref": "#/components/schemas/contactByIdSchema"

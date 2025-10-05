@@ -65,7 +65,7 @@ responses:
               example: 200
             message:
               type: string
-              example: contact updated with id 6755asdfaw6asg6
+              example: Successfully patched a contact!
             data:
               $ref: '../../../components/schema/contactByIdSchema.yaml'
   '404':

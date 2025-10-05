@@ -33,6 +33,6 @@ responses:
               example: 200
             message:
               type: string
-              example: reset password sended to user
+              example: Reset password email has been successfully sent.
   '404':
     $ref: '../../components/response/404.yaml'

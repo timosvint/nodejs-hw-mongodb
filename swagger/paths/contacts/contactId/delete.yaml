@@ -13,21 +13,7 @@ parameters:
       type: string
       example: 'tw1621561wrarfc'
 responses:
-  '200':
+  '204':
     description: 'contact deleted'
-    content:
-      application/json:
-        schema:
-          type: object
-          required:
-            - status
-            - message
-          properties:
-            status:
-              type: integer
-              example: 200
-            message:
-              type: string
-              example: delete contact by id tw1621561wrarfc!
   '404':
     $ref: '../../../components/response/404.yaml'
