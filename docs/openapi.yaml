@@ -13,6 +13,7 @@ tags:
     description: operation about auth
 servers:
   - url: http://localhost:3000
+  - url: https://nodejs-hw-mongodb-ndlc.onrender.com
 paths:
   /auth/reset-pwd:
     post:
