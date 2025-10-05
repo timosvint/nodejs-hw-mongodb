@@ -1,0 +1,42 @@
+tags:
+  - Auth
+summary: refresh token
+operationId: authRefresh
+description: refresh  token
+security: []
+responses:
+  '200':
+    description: token was refreshed
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            data:
+              type: object
+              required:
+                - accessToken
+                - refreshToken
+                - accessTokenValidUntil
+                - refreshTokenValidUntil
+              properties:
+                accessToken:
+                  type: string
+                  example: ey5916281902fas09wa5w15012508
+                refreshToken:
+                  type: string
+                  example: dgdhtwotauisijhgowei24125sfags
+                accessTokenValidUntil:
+                  type: string
+                  format: date-time
+                refreshTokenValidUntil:
+                  type: string
+                  format: date-time
+  '404':
+    $ref: '../../components/response/404.yaml'

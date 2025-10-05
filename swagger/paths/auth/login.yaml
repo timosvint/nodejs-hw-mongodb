@@ -1,0 +1,64 @@
+tags:
+  - Auth
+summary: login user
+operationId: authLogin
+description: login user to database
+security: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            type: string
+            format: email
+            example: mygmail@gmail.com
+          password:
+            type: string
+            format: password
+            example: '5215621612'
+responses:
+  '200':
+    description: user was logined
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: user was fully logined
+            data:
+              type: object
+              required:
+                - accessToken
+                - refreshToken
+                - accessTokenValidUntil
+                - refreshTokenValidUntil
+              properties:
+                accessToken:
+                  type: string
+                  example: ey5916281902fas09wa5w15012508
+                refreshToken:
+                  type: string
+                  example: dgdhtwotauisijhgowei24125sfags
+                accessTokenValidUntil:
+                  type: string
+                  format: date-time
+                refreshTokenValidUntil:
+                  type: string
+                  format: date-time
+  '404':
+    $ref: '../../components/response/404.yaml'

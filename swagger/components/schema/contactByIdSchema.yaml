@@ -1,0 +1,23 @@
+type: object
+required:
+  - id
+  - name
+  - phone
+properties:
+  id:
+    description: 'contacts id'
+    type: string
+    example: asaysy2183561saf
+  name:
+    description: 'contacts name'
+    type: string
+    example: john doe
+  email:
+    description: 'contacts email'
+    type: string
+    format: email
+    example: noobik2124@gmail.com
+  phone:
+    description: 'contacts phone number'
+    type: string
+    example: '+23421256'

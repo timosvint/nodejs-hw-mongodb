@@ -1,0 +1,68 @@
+tags:
+  - Contacts
+summary: Create contact
+operationId: postContact
+description: 'creating contact to database'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - name
+          - phoneNumber
+        properties:
+          name:
+            description: 'contact name'
+            type: string
+            example: 'john doe'
+          phoneNumber:
+            description: 'contact phoneNumber'
+            type: string
+            example: '+380215125'
+          email:
+            description: 'contact email'
+            type: string
+            format: email
+            example: wawasik@gmail.com
+          photo:
+            description: 'contact photo'
+            type: string
+            format: binary
+          isFavourite:
+            description: 'isFavourite contact'
+            type: boolean
+            example: false
+          userId:
+            description: 'contact userId'
+            type: string
+            example: 6755asdfaw6asg6
+          contactType:
+            description: 'contactType'
+            type: string
+            enum: ['work', 'home', 'personal']
+            example: work
+responses:
+  '201':
+    description: create contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: contact created
+            data:
+              $ref: '../../components/schema/contactByIdSchema.yaml'
+  '404':
+    $ref: '../../components/response/404.yaml'

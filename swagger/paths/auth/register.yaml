@@ -1,0 +1,45 @@
+tags:
+  - Auth
+summary: register user
+operationId: authRegister
+description: register user to database
+security: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+          - name
+        properties:
+          email:
+            type: string
+            format: email
+            example: 'youremail@gmail.com'
+          name:
+            type: string
+            example: noobik2124
+          password:
+            type: string
+            format: password
+            example: '1241254125216'
+responses:
+  '201':
+    description: user was registered
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: register was succesfull
